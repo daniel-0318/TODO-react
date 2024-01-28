@@ -18,12 +18,14 @@ import {AppUI} from './AppUI';
 
 function App() {
 
-  const [todos, saveTodos] = useLocalStorage('TODOS_V1', []);
+  const { item: todos, saveItem: saveTodos, loading, error } = useLocalStorage('TODOS_V1', []);
   const [searchValue, setSearchValue] = React.useState('');
 
   //estas dos constantes son "estados derivados"
   const completedTodos = todos.filter(todo => !!todo.completed).length;
   const totalTodos = todos.length;
+
+
 
   const searchTodos = todos.filter(
     (todo)=>{
@@ -60,6 +62,8 @@ function App() {
     searchTodos = {searchTodos}
     completeTodo = {completeTodo}
     deleteTodo = {deleteTodo}
+    loading = {loading}
+    error = {error}
     />
   )
   

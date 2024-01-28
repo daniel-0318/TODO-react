@@ -5,7 +5,7 @@ import { TodoList } from "../TodoList";
 import { TodoItem } from "../TodoItem";
 import React  from 'react';
 
-function AppUI({ completedTodos,totalTodos,searchValue,setSearchValue,searchTodos,completeTodo,deleteTodo }){
+function AppUI({ completedTodos,totalTodos,searchValue,setSearchValue,searchTodos,completeTodo,deleteTodo,loading,error }){
   return (
     <React.Fragment>
   
@@ -13,6 +13,10 @@ function AppUI({ completedTodos,totalTodos,searchValue,setSearchValue,searchTodo
       <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue}/>
       
       <TodoList>
+        {loading && <p> Estamos Cargando...... </p> }
+        {error && <p> Hubo un error!!...... </p> }
+        {(!loading && searchTodos.length === 0) && <p> Crea tu primer TODO!!...... </p> }
+
         { searchTodos.map(todo => (
           
           <TodoItem 
