@@ -3,8 +3,8 @@ import './todoLoading.css'
 
 function TodosLoading() {
   return(
-    <div class="container">
-    <div class="spinner">
+    <div className="container">
+    <div className="spinner">
     <span></span>
     <span></span>
     <span></span>
