@@ -7,6 +7,7 @@ function TodoProvider({children}){
   
   const { item: todos, saveItem: saveTodos, loading, error } = useLocalStorage('TODOS_V1', []);
   const [searchValue, setSearchValue] = React.useState('');
+  const [openModal, setOpenModal] = React.useState(false);
 
   //estas dos constantes son "estados derivados"
   const completedTodos = todos.filter(todo => !!todo.completed).length;
@@ -19,6 +20,16 @@ function TodoProvider({children}){
       return todo.text.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase());
     }
   );
+
+  const addTodo = (text)=>{
+    const newTodos = [...todos];
+    newTodos.push({
+      text,
+      completed:false,
+    });
+    saveTodos(newTodos);
+
+  };
 
   const completeTodo = (text) => {
 
@@ -50,7 +61,10 @@ function TodoProvider({children}){
       completeTodo,
       deleteTodo,
       loading,
-      error 
+      error,
+      openModal, 
+      setOpenModal,
+      addTodo,
       }}>
       {children}
     </TodoContext.Provider>
